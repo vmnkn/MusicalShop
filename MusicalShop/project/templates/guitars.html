@@ -1,0 +1,71 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+{% load custom_tags %}
+
+{% block title %}
+Guitars
+{% endblock title %}
+
+{% block content %}
+    {% current_time '%d %b %Y' %}
+    {{ sale|default_if_none:'No sales today' }}
+
+    <form action="" method="get">
+       {{ filterset.form.as_p }}
+       <input type="submit" value="Find" />
+    </form>
+<hr>
+
+    {% if guitars %}
+        <table>
+            <tr>
+                <td><b><h2>Name</h2></b></td>
+                <td><b><h2>Description</h2></b></td>
+                <td><b><h2>Quantity</h2></b></td>
+                <td><b><h2>Price</h2></b></td>
+                <td><b><h2>Material</h2></b></td>
+                <td><b><h2>Color</h2></b></td>
+                <td><b><h2>Manufacturer</h2></b></td>
+                <td><b><h2>Category</h2></b></td>
+            </tr>
+            {% for guitar in guitars %}
+            <tr>
+                <td><h2>{{ guitar.name }}</h2></td>
+                <td><h2>{{ guitar.description|truncatewords:4 }}</h2></td>
+                <td><h2>{{ guitar.quantity }}</h2></td>
+                <td><h2>{{ guitar.price|currency }}</h2></td>
+                <td><h2>{{ guitar.material }}</h2></td>
+                <td><h2>{{ guitar.color }}</h2></td>
+                <td><h2>{{ guitar.manufacturer.name }}</h2></td>
+                <td><h2>{{ guitar.category.name }}</h2></td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h2>Product does`t exists</h2>
+    {% endif %}
+
+    {# PAGINATION #}
+
+    {# ABOUT PREVIOUS PAGES #}
+    {% if page_obj.has_previous %}
+        <a href="?{% url_replace page=1 %}">1</a>
+        {% if page_obj.previous_page_number != 1 %}
+            ...
+            <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+        {% endif %}
+    {% endif %}
+
+    {# ABOUT PAGE #}
+    {{ page_obj.number }}
+
+    {# ABOUT NEXT PAGES #}
+    {% if page_obj.has_next %}
+        <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+        {% if paginator.num_pages != page_obj.next_page_number %}
+        ...
+        <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
+    {% endif %}
+{% endif %}
+{% endblock content %}

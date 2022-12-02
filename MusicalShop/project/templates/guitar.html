@@ -1,0 +1,16 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Guitar
+{% endblock title %}
+
+{% block content %}
+                <td><h2>{{ guitar.name }}</h2></td>
+                <td><h2>{{ guitar.description|truncatewords:4 }}</h2></td>
+                <td><h2>{{ guitar.quantity }}</h2></td>
+                <td><h2>{{ guitar.price }}</h2></td>
+                <td><h2>{{ guitar.material }}</h2></td>
+                <td><h2>{{ guitar.color }}</h2></td>
+                <td><h2>{{ guitar.manufacturer.name }}</h2></td>
+                <td><h2>{{ guitar.category.name }}</h2></td>
+{% endblock content %}

@@ -1,0 +1,25 @@
+from musicshop.models import *
+
+Category.objects.create(name='Bass')
+Category.objects.create(name='Acoustic')
+Category.objects.create(name='Electric')
+Category.objects.create(name='Classic')
+Category.objects.create(name='Acoustic-Bass')
+Category.objects.create(name='Electric-Acoustic')
+
+Manufacturer.objects.create(name='Ibanez')
+Manufacturer.objects.create(name='Epiphone')
+Manufacturer.objects.create(name='Jackson')
+Manufacturer.objects.create(name='Dime')
+Manufacturer.objects.create(name='Gibson')
+Manufacturer.objects.create(name='Fender')
+
+Guitar.objects.create(name='FENDER SQUIER MM Stratocaster Black', description='FENDER SQUIER MM STRATOCASTER HARD TAIL BLACK – шестиструнная электрогитара, бюджетная модель Стратокастера от Squier. Это отличная возможность для начинающих гитаристов приобрести настоящий Фендер по весьма демократичной цене. Гриф удобного профиля «С» выполнен из клена, покрытие - матовое. Мензура – 25,5 дюйма (648 миллиметров). Накладка радиуса 9,5 дюймов инкрустирована классическими точками. За узнаваемое звучание инструмента отвечают три звукоснимателя сингла. Звук настраивается пятипозиционным переключателем, двумя регуляторами тембра и регулятором громкости. Фиксированный бридж обеспечивает стабильность строя. MM Strat доступен в двух вариантах цветового исполнения. Представленная гитара – стильного черного цвета с контрастным белым пикгардом.', quantity=12, price=17400.0, material='Maple', color='Black', strings_number=6, lads_number=24, manufacturer=Manufacturer.objects.get(name='Fender'), category=Category.objects.get(name='Electric'))
+Guitar.objects.create(name='FENDER SQUIER Affinity 2021 Stratocaster HH LRL Olympic White', description='электрогитара, цвет белый, корпус - тополь, гриф - клён, накладка грифа - индийский лавр, порожек - синтетическая кость, профиль грифа - C-shape, лады - 21 Medium Jumbo, мензура 25,5` (648 мм), звукосниматели HH - Fender Designed Affinity Pickups (керамические магниты), регуляторы - 1 громкость, 1 тон, 3-х позиционный переключатель, бридж - 2-Point Synchronized Tremolo, колки - литые, фурнитура - хром', quantity=5, price=36550.0, material='Maple', color='White', strings_number=6, lads_number=21, manufacturer=Manufacturer.objects.get(name='Fender'), category=Category.objects.get(name='Electric'))
+Guitar.objects.create(name='IBANEZ GRG7221QA-TKS', description='Электрогитара, семиструнная модель в сером цвете. Материал корпуса - тополь, гриф из клена. Инструмент имеет 24 лада, мензуру 25.5`, 2 звукоснимателя H-H, регуляторы громкости и тона.', quantity=2, price=33000.0, material='Maple', color='Grey', strings_number=7, lads_number=24, manufacturer=Manufacturer.objects.get(name='Ibanez'), category=Category.objects.get(name='Electric'))
+Guitar.objects.create(name='EPIPHONE Les Paul Studio E1 Ebony', description='Электрогитара, цвет черный, корпус - красное дерево, гриф - красное дерево, накладка грифа - палисандр. Крепление грифа - на болтах, 22 лада, мензура - 24,75``. Звукосниматели - H/H - 650R (нэк) / 700Т (бридж) Zebra Coil. Регуляторы - 2 громкости, 2 тона, 3-позиционный переключатель. Бридж Tune-O-Matic с фиксированным струнодержателем Stop Bar. Цвет фурнитуры - хром.', quantity=14, price=46000.0, material='Red Wood', color='Black', strings_number=6, lads_number=22, manufacturer=Manufacturer.objects.get(name='Epiphone'), category=Category.objects.get(name='Electric'))
+Guitar.objects.create(name='', description='', quantity=, price=, material='', color='', strings_number=, lads_number=, manufacturer=Manufacturer.objects.get(name=''), category=Category.objects.get(name=''))
+Guitar.objects.create(name='', description='', quantity=, price=, material='', color='', strings_number=, lads_number=, manufacturer=Manufacturer.objects.get(name=''), category=Category.objects.get(name=''))
+Guitar.objects.create(name='', description='', quantity=, price=, material='', color='', strings_number=, lads_number=, manufacturer=Manufacturer.objects.get(name=''), category=Category.objects.get(name=''))
+
+
