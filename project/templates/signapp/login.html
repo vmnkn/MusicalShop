@@ -1,0 +1,29 @@
+{% extends 'flatpages/default.html' %}
+
+
+{% block content %}
+<div class="col mb-5">
+    <div class="col mb-5">
+        <div class="card h-100">
+            <div class="card-body p-4">
+                <div class="text-center">
+                    <form method="post" action="{% url 'login' %}">
+                            {% csrf_token %}
+                            {{ form.username.label_tag }}
+                            {{ form.username }}
+                            {{ form.password.label_tag }}
+                            {{ form.password }}
+                    <hr>
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <input type="submit" class="btn btn-outline-dark mt-auto button" value="Sign In">
+                        </div>
+                    </form>
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="http://127.0.0.1:8000/signup/">Registration</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

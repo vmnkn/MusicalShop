@@ -1,0 +1,21 @@
+{% extends 'flatpages/default.html' %}
+
+
+{% block content %}
+<div class="col mb-5">
+    <div class="col mb-5">
+        <div class="card h-100">
+            <div class="card-body p-4">
+                <div class="text-center">
+                    <form method="post" action="{% url 'signup' %}">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <hr>
+                        <input type="submit" class="btn btn-outline-dark mt-auto button" value="Continue">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
