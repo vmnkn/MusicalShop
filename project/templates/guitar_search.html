@@ -7,10 +7,13 @@
 {% endblock title %}
 
 {% block content %}
+
 <form action="" method="get">
+    {% csrf_token %}
     {{ filterset.form.as_p }}
     <input type="submit" value="Find" />
 </form>
+<hr><hr><hr>
 {% if guitars %}
 {% for guitar in guitars %}
 <div class="col mb-5">
@@ -35,7 +38,7 @@
                         <div class="bi-star-fill"></div>
                     </div>
                     <!-- Product price-->
-                    <span class="text-muted text-decoration-line-through">$20.00</span>
+                    <span class="text-muted text-decoration-line-through">{{ guitar.price|currency:'usd'}}</span>
                     {{ guitar.price|currency:'rub'}}
                 </div>
             </div>

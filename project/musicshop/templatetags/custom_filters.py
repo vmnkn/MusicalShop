@@ -11,4 +11,7 @@ CURRENCIES_SYMBOLS = {
 @register.filter(name='currency')
 def currency(value, code='rub'):
     postfix = CURRENCIES_SYMBOLS[code]
-    return f'{value} {postfix}'
+    if postfix == '$':
+        return f'{round(value / 70)} {postfix}'
+    else:
+        return f'{value} {postfix}'
