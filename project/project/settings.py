@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'signapp',
 
     'django_filters',
+    'widget_tweaks',
 ]
 
 SITE_ID = 1

@@ -2,7 +2,9 @@ from django import forms
 from .models import Guitar
 
 
-class GuitarForm(forms.ModelForm):
+class GuitarForm(forms.Form):
+    name = forms.CharField(widget=forms.TextInput(attrs={'class': 'field'}))
+
     class Meta:
         model = Guitar
         fields = [
@@ -17,3 +19,8 @@ class GuitarForm(forms.ModelForm):
             'manufacturer',
             'category',
         ]
+
+    def clean(self):
+        cleaned_data = super().clean()
+        return cleaned_data
+

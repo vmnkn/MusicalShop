@@ -37,7 +37,7 @@
                     </div>
                     <!-- Product actions-->
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View more</a></div>
                     </div>
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                         <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
@@ -48,31 +48,35 @@
         {% endfor %}
 {% else %}
 {% endif %}
-    <div class="text-center">
-        <hr>
-    {% if guitars %}
-            {# PAGINATION #}
+{% if guitars %}
+<div class="text-center">
+    <div class="btn-group-vertical">
+        <div class="navbar-nav">
+            <hr>
+                {# PAGINATION #}
 
-            {# ABOUT PREVIOUS PAGES #}
-            {% if page_obj.has_previous %}
-                <a class="btn btn-outline-dark mt-auto" href="?{% url_replace page=1 %}">1</a>
-                {% if page_obj.previous_page_number != 1 %}
+                {# ABOUT PREVIOUS PAGES #}
+                {% if page_obj.has_previous %}
+                    <a class="btn btn-outline-dark mt-auto" href="?{% url_replace page=1 %}">Page 1</a>
+                    {% if page_obj.previous_page_number != 1 %}
+                        ...
+                        <a class="btn btn-outline-dark mt-auto" href="?{% url_replace page=page_obj.previous_page_number %}">Page {{ page_obj.previous_page_number }}</a>
+                    {% endif %}
+                {% endif %}
+
+                {# ABOUT PAGE #}
+                Page {{ page_obj.number }}
+
+                {# ABOUT NEXT PAGES #}
+                {% if page_obj.has_next %}
+                    <a class="btn btn-outline-dark mt-auto" href="?{% url_replace page=page_obj.next_page_number %}">Page {{ page_obj.next_page_number }}</a>
+                    {% if paginator.num_pages != page_obj.next_page_number %}
                     ...
-                    <a class="btn btn-outline-dark mt-auto" href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+                    <a class="btn btn-outline-dark mt-auto" href="?{% url_replace page=page_obj.paginator.num_pages %}">Page {{ page_obj.paginator.num_pages }}</a>
                 {% endif %}
             {% endif %}
-
-            {# ABOUT PAGE #}
-            {{ page_obj.number }}
-
-            {# ABOUT NEXT PAGES #}
-            {% if page_obj.has_next %}
-                <a class="btn btn-outline-dark mt-auto" href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
-                {% if paginator.num_pages != page_obj.next_page_number %}
-                ...
-                <a class="btn btn-outline-dark mt-auto" href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
             {% endif %}
-        {% endif %}
-        {% endif %}
+            </div>
+        </div>
     </div>
 {% endblock content %}
