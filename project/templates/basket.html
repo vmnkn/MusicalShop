@@ -1,0 +1,62 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+
+{% block content %}
+{% if baskets %}
+
+{% for basket in baskets %}
+<div class="col mb-5">
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                    {% if basket.product.sale %}
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                    {% endif %}
+                    <!-- Product image-->
+                    {% if basket.product.photo %}
+                        <img class="card-img-top" src="{{ MEDIA_URL }}{{ basket.product.photo }}" alt="..." />
+                    {% else %}
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                    {% endif %}
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">{{ basket.product.name|truncatechars:14 }}</h5>
+                            <!-- Product price-->
+                            {% if basket.product.sale %}
+                            <p>Price: <span class="text-muted">{{ basket.sale_sum|currency:'rub'}}</span></p>
+                            {% else %}
+                            <p>Price: <span class="text-muted">{{ basket.sum|currency:'rub'}}</span></p>
+                            {% endif %}
+                            <p>Quantity: <span class="text-muted">{{ basket.quantity }}</span></p>
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'musicshop:basket_add' basket.product.id %}">Add +1</a></div>
+                    </div>
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'musicshop:basket_delete' basket.id %}">Remove</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endfor %}
+<hr>
+<div class="col-lg-4">
+    <div class="card mb-4">
+        <div class="card-header">Results</div>
+            <div class="card-body">
+                <p><h5 class="fw-bolder">Products: {{ total_quantity }}</h5>
+                <p><h5 class="fw-bolder">Total sum: {{ total_sum|currency:'rub' }}</h5>
+            </div>
+    </div>
+</div>
+{% else %}
+<h5 class="fw-bolder">Basket is empty</h5>
+<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'musicshop:guitar_list' %}">Go to shop</a></div>
+</div>
+{% endif %}
+{% endblock content %}

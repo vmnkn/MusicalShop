@@ -30,16 +30,6 @@ class GuitarFilter(FilterSet):
         queryset=Manufacturer.objects.all(),
     )
 
-    search_strings = NumberFilter(
-        field_name='strings_number',
-        label='Strings',
-    )
-
-    search_lads = NumberFilter(
-        field_name='lads_number',
-        label='Lads',
-    )
-
     search_price = NumberFilter(
         field_name='price',
         label='Price',

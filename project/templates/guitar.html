@@ -11,37 +11,38 @@
             <div class="col mb-5">
                 <div class="card h-100">
                     <!-- Sale badge-->
+                    {% if guitar.sale %}
                     <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                    {% endif %}
                     <!-- Product image-->
-                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                    {% if guitar.photo %}
+                        <img class="card-img-top" src="{{ MEDIA_URL }}{{ guitar.photo }}" alt="..." />
+                    {% else %}
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                    {% endif %}
                     <!-- Product details-->
                     <div class="card-body p-4">
                         <div class="text-center">
                             <!-- Product name-->
                             <h5 class="fw-bolder">{{ guitar.name|truncatechars:14 }}</h5>
-                            <!-- Product reviews-->
-                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                            </div>
                             <!-- Product price-->
-                            <span class="text-muted text-decoration-line-through">$20.00</span>
-                            {{ guitar.price|currency:'rub'}}
+                            {% if guitar.sale %}
+                            <span class="text-muted text-decoration-line-through">{{ guitar.price|currency:'rub'}}</span>
+                            {{ guitar.sale_price|currency:'rub'}}
+                            {% else %}
+                            <div class="fw-bolder">{{ guitar.price|currency:'rub'}}</div>
+                            {% endif %}
                         </div>
                     </div>
                     <!-- Product actions-->
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                    </div>
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'musicshop:basket_add' guitar.id %}">Add to cart</a></div>
                     </div>
                 </div>
             </div>
         </div>
+<div class="fw-bolder">
+    <p>Description: <span class="text-muted">{{ guitar.description }}</span></p>
+</div>
 {% endif %}
 {% endblock content %}

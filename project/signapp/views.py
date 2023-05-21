@@ -7,4 +7,4 @@ from .forms import BaseRegisterForm
 class BaseRegisterView(CreateView):
     model = User
     form_class = BaseRegisterForm
-    success_url = 'http://127.0.0.1:8000/guitars/'
+    success_url = 'http://127.0.0.1:8000/'

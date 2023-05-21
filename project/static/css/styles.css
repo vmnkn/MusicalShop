@@ -14,15 +14,15 @@
 @font-face {
 	font-family: 'shredded';
 	src: url('../fonts/shredded/shredded.eot') format('eot');
-	src: local('☺'), url('../fonts/shredded/shredded.woff') format('woff'), url('../fonts/shredded/shredded.ttf') format('truetype'), url('../fonts/shredded/shredded.svg') format('svg');
+	scr: local('../fonts/shredded/shredded.ttf'), url('../fonts/shredded/shredded.ttf') format('truetype');
 	font-weight: 500;
 	font-style: medium;
 }
 
 @font-face {
 	font-family: 'shredded';
-	src: url('../fonts/shredded_small/shredded_small.eot');
-	src: local('☺'), url('../fonts/shredded_small/shredded_small.woff') format('woff'), url('../fonts/shredded_small/shredded_small.ttf') format('truetype'), url('../fonts/shredded_small/shredded_small.svg') format('svg');
+	src: url('../fonts/shredded_small/shredded_small.eot') format('eot');
+	src: local('../fonts/shredded/shredded.eot'), url('../fonts/shredded_small/shredded_small.woff') format('woff'), url('../fonts/shredded_small/shredded_small.ttf') format('truetype'), url('../fonts/shredded_small/shredded_small.svg') format('svg');
 	font-weight: 300;
 	font-style: small;
 }
