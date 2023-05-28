@@ -12,18 +12,20 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+env_path = Path('.') / '.env'
+load_dotenv(dotenv_path=env_path)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#*mvb4v46&cy&(v1ixxt045=v4x^8+tuq3d4ize#%yt-qcc2)5'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -34,6 +36,7 @@ ALLOWED_HOSTS = ['127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -56,6 +59,7 @@ SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -142,8 +146,28 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
-LOGIN_URL = 'http://127.0.0.1:8000/shop/'
+LOGIN_URL = 'http://127.0.0.1:8000/'
 LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/shop/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+LANGUAGES = [
+    ('en-us', 'English'),
+    ('ru', 'Русский')
+]
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale')
+]
+
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_USE_SSL = True
+
+ADMINS = [
+    ('admin', 'valerijmanukyan.manukyan@yandex.ru'),
+]
+SERVER_EMAIL = os.getenv('SERVER_EMAIL')

@@ -1,0 +1,102 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+{% load custom_tags %}
+
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+{% if products %}
+        {% for product in products %}
+        <div class="col mb-5">
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                    {% if product.sale %}
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Скидка</div>
+                    {% endif %}
+                    <!-- Product image-->
+                    {% if product.photo %}
+                        <img class="card-img-top" src="{{ MEDIA_URL }}{{ product.photo }}" alt="..." />
+                    {% else %}
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                    {% endif %}
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">{{ product.name|truncatechars:14 }}</h5>
+                            <!-- Product price-->
+                            {% if product.sale %}
+                            <span class="text-muted text-decoration-line-through">{{ product.price|currency:'rub'}}</span>
+                            {{ product.sale_price|currency:'rub'}}
+                            {% else %}
+                            {{ product.price|currency:'rub'}}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'musicshop:product_detail' product.id %}">Узнать больше</a></div>
+                    </div>
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'musicshop:basket_add' product.id %}">Добавить в корзину</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+{% else %}
+{% endif %}
+{% if products %}
+<div class="text-center">
+    <div class="btn-group-vertical">
+        <div class="navbar-nav">
+            <hr>
+                {# PAGINATION #}
+
+                {# ABOUT PREVIOUS PAGES #}
+                {% if page_obj.has_previous %}
+                    <p class="fw-bolder"><a class="btn btn-outline-dark mt-auto" href="?{% url_replace page=1 %}">Страница 1</a></p>
+                    {% if page_obj.previous_page_number != 1 %}
+                        ...
+                        <p class="fw-bolder"><a class="btn btn-outline-dark mt-auto" href="?{% url_replace page=page_obj.previous_page_number %}">Страница {{ page_obj.previous_page_number }}</a></p>
+                    {% endif %}
+                {% endif %}
+
+                {# ABOUT PAGE #}
+                <p class="fw-bolder">Страница {{ page_obj.number }}</p>
+
+                {# ABOUT NEXT PAGES #}
+                {% if page_obj.has_next %}
+                    <p class="fw-bolder"><a class="btn btn-outline-dark mt-auto" href="?{% url_replace page=page_obj.next_page_number %}">Страница {{ page_obj.next_page_number }}</a></p>
+                    {% if paginator.num_pages != page_obj.next_page_number %}
+                    ...
+                    <p class="fw-bolder"><a class="btn btn-outline-dark mt-auto" href="?{% url_replace page=page_obj.paginator.num_pages %}">Страница {{ page_obj.paginator.num_pages }}</a></p>
+                {% endif %}
+            {% endif %}
+            {% endif %}
+            </div>
+        </div>
+    </div>
+<div class="col-lg-4">
+    <div class="card mb-4">
+        <div class="card-header">Поиск</div>
+            <div class="card-body">
+                <div class="input-group">
+                    <form action="" method="get">
+                        {% csrf_token %}
+                            {% for field in filterset.form %}
+                            {{ field.label_tag }}
+                            <p>{{ field }}</p>
+                            {% endfor %}
+                        <hr>
+                        <input type="submit" value="Найти" class="btn btn-outline-dark mt-auto"/>
+                        <hr>
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
+{% endblock content %}

@@ -14,34 +14,34 @@
                 <div class="card h-100">
                     <!-- Sale badge-->
                     {% if guitar.sale %}
-                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Скидка</div>
                     {% endif %}
-                    <!-- Product image-->
+                    <!-- guitar image-->
                     {% if guitar.photo %}
                         <img class="card-img-top" src="{{ MEDIA_URL }}{{ guitar.photo }}" alt="..." />
                     {% else %}
                         <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                     {% endif %}
-                    <!-- Product details-->
+                    <!-- guitar details-->
                     <div class="card-body p-4">
                         <div class="text-center">
-                            <!-- Product name-->
+                            <!-- guitar name-->
                             <h5 class="fw-bolder">{{ guitar.name|truncatechars:14 }}</h5>
-                            <!-- Product price-->
+                            <!-- guitar price-->
                             {% if guitar.sale %}
                             <span class="text-muted text-decoration-line-through">{{ guitar.price|currency:'rub'}}</span>
                             {{ guitar.sale_price|currency:'rub'}}
                             {% else %}
-                            <div class="fw-bolder">{{ guitar.price|currency:'rub'}}</div>
+                            {{ guitar.price|currency:'rub'}}
                             {% endif %}
                         </div>
                     </div>
-                    <!-- Product actions-->
+                    <!-- guitar actions-->
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'musicshop:guitar_detail' guitar.id %}">View more</a></div>
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'musicshop:product_detail' guitar.id %}">Узнать больше</a></div>
                     </div>
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'musicshop:basket_add' guitar.id %}">Add to cart</a></div>
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'musicshop:basket_add' guitar.id %}">Добавить в корзину</a></div>
                     </div>
                 </div>
             </div>
@@ -58,22 +58,22 @@
 
                 {# ABOUT PREVIOUS PAGES #}
                 {% if page_obj.has_previous %}
-                    <p><a class="btn btn-outline-dark mt-auto" href="?{% url_replace page=1 %}">Page 1</a></p>
+                    <p class="fw-bolder"><a class="btn btn-outline-dark mt-auto" href="?{% url_replace page=1 %}">Страница 1</a></p>
                     {% if page_obj.previous_page_number != 1 %}
                         ...
-                        <p><a class="btn btn-outline-dark mt-auto" href="?{% url_replace page=page_obj.previous_page_number %}">Page {{ page_obj.previous_page_number }}</a></p>
+                        <p class="fw-bolder"><a class="btn btn-outline-dark mt-auto" href="?{% url_replace page=page_obj.previous_page_number %}">Страница {{ page_obj.previous_page_number }}</a></p>
                     {% endif %}
                 {% endif %}
 
                 {# ABOUT PAGE #}
-                <p>Page {{ page_obj.number }}</p>
+                <p class="fw-bolder">Страница {{ page_obj.number }}</p>
 
                 {# ABOUT NEXT PAGES #}
                 {% if page_obj.has_next %}
-                    <p><a class="btn btn-outline-dark mt-auto" href="?{% url_replace page=page_obj.next_page_number %}">Page {{ page_obj.next_page_number }}</a></p>
+                    <p class="fw-bolder"><a class="btn btn-outline-dark mt-auto" href="?{% url_replace page=page_obj.next_page_number %}">Страница {{ page_obj.next_page_number }}</a></p>
                     {% if paginator.num_pages != page_obj.next_page_number %}
                     ...
-                    <p><a class="btn btn-outline-dark mt-auto" href="?{% url_replace page=page_obj.paginator.num_pages %}">Page {{ page_obj.paginator.num_pages }}</a></p>
+                    <p class="fw-bolder"><a class="btn btn-outline-dark mt-auto" href="?{% url_replace page=page_obj.paginator.num_pages %}">Страница {{ page_obj.paginator.num_pages }}</a></p>
                 {% endif %}
             {% endif %}
             {% endif %}

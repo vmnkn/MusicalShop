@@ -1,37 +1,38 @@
 from django_filters import FilterSet, CharFilter, ModelChoiceFilter, NumberFilter
-from .models import Guitar, Category, Manufacturer
+from .models import Product, Category, Manufacturer, Material
 from django import forms
 
 
-class GuitarFilter(FilterSet):
+class ProductFilter(FilterSet):
     search_name = CharFilter(
         field_name='name',
-        label='Guitar name',
+        label='Название',
         lookup_expr='icontains',
     )
 
-    search_material = CharFilter(
+    search_material = ModelChoiceFilter(
+        empty_label='Все материалы',
         field_name='material',
-        label='Material',
-        lookup_expr='icontains',
+        label='Материал',
+        queryset=Material.objects.all(),
     )
 
     search_category = ModelChoiceFilter(
-        empty_label='All categories',
+        empty_label='Все категории',
         field_name='category',
-        label='Category',
+        label='Категория',
         queryset=Category.objects.all(),
     )
 
     search_manufacturer = ModelChoiceFilter(
-        empty_label='All manufacturers',
+        empty_label='Все производители',
         field_name='manufacturer',
-        label='Manufacturer',
+        label='Производитель',
         queryset=Manufacturer.objects.all(),
     )
 
     search_price = NumberFilter(
         field_name='price',
-        label='Price',
+        label='Цена',
         lookup_expr='gt',
     )

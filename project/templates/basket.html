@@ -10,7 +10,7 @@
                 <div class="card h-100">
                     <!-- Sale badge-->
                     {% if basket.product.sale %}
-                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Скидка</div>
                     {% endif %}
                     <!-- Product image-->
                     {% if basket.product.photo %}
@@ -34,10 +34,10 @@
                     </div>
                     <!-- Product actions-->
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'musicshop:basket_add' basket.product.id %}">Add +1</a></div>
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'musicshop:basket_add' basket.product.id %}">Добавить +1</a></div>
                     </div>
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'musicshop:basket_delete' basket.id %}">Remove</a></div>
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'musicshop:basket_delete' basket.id %}">Удалить</a></div>
                     </div>
                 </div>
             </div>
@@ -46,17 +46,20 @@
 <hr>
 <div class="col-lg-4">
     <div class="card mb-4">
-        <div class="card-header">Results</div>
+        <div class="card-header">Итог</div>
             <div class="card-body">
-                <p><h5 class="fw-bolder">Products: {{ total_quantity }}</h5>
-                <p><h5 class="fw-bolder">Total sum: {{ total_sum|currency:'rub' }}</h5>
+                <p><h5 class="fw-bolder">Всего товаров: {{ total_quantity }}</h5>
+                <p><h5 class="fw-bolder">Общая стоимость: {{ total_sum|currency:'rub' }}</h5>
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'musicshop:make_order' %}">Оформить заказ</a></div>
+                </div>
             </div>
     </div>
 </div>
 {% else %}
-<h5 class="fw-bolder">Basket is empty</h5>
+<h5 class="fw-bolder">Корзина пустая</h5>
 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'musicshop:guitar_list' %}">Go to shop</a></div>
+    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'musicshop:product_list' %}">Перейти в магазин</a></div>
 </div>
 {% endif %}
 {% endblock content %}

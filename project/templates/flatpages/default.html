@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         {% load static %}
+        {% load custom_tags %}
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -18,17 +19,21 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="http://127.0.0.1:8000/shop/">Products List</a>
+                <a class="navbar-brand mb-2 mb-lg-0 ms-lg-4" href="http://127.0.0.1:8000/shop/">Все товары</a>
+                <a class="navbar-brand mb-2 mb-lg-0 ms-lg-4" href="{% url 'musicshop:product_search' %}">Поиск товаров</a>
+                <a class="navbar-brand mb-2 mb-lg-0 ms-lg-4" href="{% url 'musicshop:user_view' %}">Аккаунт</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="http://127.0.0.1:8000/shop/account/">Account</a></li>
-                        <li class="nav-item"><a class="nav-link" href="http://127.0.0.1:8000/shop/search/">Search</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'musicshop:guitars_list' %}">Гитары</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'musicshop:strings_list' %}">Струны</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'musicshop:pedals_list' %}">Педали</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'musicshop:kombos_list' %}">Комбоусилители</a></li>
                     </ul>
-                    <a class="d-flex" href="{% url 'musicshop:basket' %}">
+                    <a class="d-flex navbar-brand mb-2 mb-lg-0 ms-lg-4" href="{% url 'musicshop:basket' %}">
                         <div class="btn btn-outline-dark">
-                            <i class="bi-cart-fill me-1">Cart</i>
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">Products</span>
+                            <i class="bi-cart-fill me-1">Корзина</i>
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">{% cart %}</span>
                         </div>
                     </a>
                 </div>
@@ -38,8 +43,8 @@
         <header class="bg-black py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Guitar Shop</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">With this shop homepage template</p>
+                    <h1 class="display-4 fw-bolder">Музыкальный магазин</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Наш телефон: +7 (9342) 65-18-02</p>
                 </div>
             </div>
         </header>
@@ -54,7 +59,7 @@
         </section>
         <!-- Footer-->
         <footer class="py-5 bg-black">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Musical Shop 2023</p></div>
+            <div class="container"><p class="m-0 text-center text-white">&copy; Музыкальный магазин 2023</p></div>
         </footer>
     </body>
 </html>

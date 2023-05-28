@@ -3,7 +3,7 @@ from django import template
 
 register = template.Library()
 CURRENCIES_SYMBOLS = {
-    'rub': 'P',
+    'rub': 'Руб.',
     'usd': '$',
 }
 

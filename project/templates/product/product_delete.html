@@ -1,0 +1,42 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_tags %}
+{% load custom_filters %}
+{% block content %}
+<div class="col mb-5">
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                    {% if object.sale %}
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                    {% endif %}
+                    <!-- object image-->
+                    {% if object.photo %}
+                        <img class="card-img-top" src="{{ MEDIA_URL }}{{ object.photo }}" alt="..." />
+                    {% else %}
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                    {% endif %}
+                    <!-- object details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- object name-->
+                            <h5 class="fw-bolder">{{ object.name|truncatechars:14 }}</h5>
+                            <!-- object price-->
+                            {% if object.sale %}
+                            <span class="text-muted text-decoration-line-through">{{ object.price|currency:'rub'}}</span>
+                            {{ object.sale_price|currency:'rub'}}
+                            {% else %}
+                            <div class="fw-bolder">{{ object.price|currency:'rub'}}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- object actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center">
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="submit" value="Удалить?" class="btn btn-outline-dark mt-auto">
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock content %}

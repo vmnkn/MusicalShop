@@ -4,16 +4,13 @@ from django.core.validators import MinValueValidator
 from django.urls import reverse
 
 
-class Guitar(models.Model):
+class Product(models.Model):
     name = models.CharField(max_length=100,
                             unique=True)
     description = models.TextField()
     quantity = models.IntegerField(validators=[MinValueValidator(0)])
-    price = models.FloatField(validators=[MinValueValidator(0.0)])
-    material = models.CharField(max_length=100)
+    price = models.IntegerField(validators=[MinValueValidator(0.0)])
     color = models.CharField(max_length=100)
-    strings_number = models.IntegerField(validators=[MinValueValidator(0)])
-    lads_number = models.IntegerField(validators=[MinValueValidator(0)])
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/', null=True)
 
     sale = models.BooleanField(default=False)
@@ -21,15 +18,24 @@ class Guitar(models.Model):
 
     manufacturer = models.ForeignKey('Manufacturer', on_delete=models.CASCADE)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
+    material = models.ForeignKey('Material', on_delete=models.CASCADE)
 
     def get_absolute_url(self):
-        return reverse('guitar_detail', args=[str(self.id)])
+        return reverse('product_detail', args=[str(self.id)])
 
     def __str__(self):
         return self.name
 
 
 class Manufacturer(models.Model):
+    name = models.CharField(max_length=100,
+                            unique=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Material(models.Model):
     name = models.CharField(max_length=100,
                             unique=True)
 
@@ -47,7 +53,7 @@ class Category(models.Model):
 
 class Basket(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Guitar, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=0)
     created_timestamp = models.DateTimeField(auto_now_add=True)
 
@@ -59,4 +65,5 @@ class Basket(models.Model):
 
     def sale_sum(self):
         return self.quantity * self.product.sale_price
+
 

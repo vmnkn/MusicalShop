@@ -6,12 +6,22 @@
         <div class="card h-100">
             <div class="card-body p-4">
                 <div class="text-left">
-                    <p>Username: {{ request.user.username }}</p>
+                    <p>Имя пользователя: {{ request.user.username }}</p>
                     <p>Email: {{ request.user.email }}</p>
                     <hr>
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="http://127.0.0.1:8000/logout/">Exit</a></div>
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'logout' %}">Выйти</a></div>
                     </div>
+                    {% if is_not_manager %}
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'become_manager' %}">Стать менеджером</a></div>
+                    </div>
+                    {% endif %}
+                    {% if is_manager %}
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'musicshop:create_product' %}">Создать товар</a></div>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

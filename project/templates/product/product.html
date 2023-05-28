@@ -1,0 +1,56 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+    {% if product %}
+        <div class="col mb-5">
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                    {% if product.sale %}
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Скидка</div>
+                    {% endif %}
+                    <!-- Product image-->
+                    {% if product.photo %}
+                        <img class="card-img-top" src="{{ MEDIA_URL }}{{ product.photo }}" alt="..." />
+                    {% else %}
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                    {% endif %}
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">{{ product.name|truncatechars:14 }}</h5>
+                            <!-- Product price-->
+                            {% if product.sale %}
+                            <span class="text-muted text-decoration-line-through">{{ product.price|currency:'rub'}}</span>
+                            {{ product.sale_price|currency:'rub'}}
+                            {% else %}
+                            <div class="fw-bolder">{{ product.price|currency:'rub'}}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'musicshop:basket_add' product.id %}">Добавить в корзину</a></div>
+                    </div>
+                    {% if is_manager %}
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'musicshop:update_product' product.id %}">Редактировать</a></div>
+                    </div>
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'musicshop:delete_product' product.id %}">Удалить</a></div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+<div class="fw-bolder">
+    <p>Описание: <span class="text-muted">{{ product.description }}</span></p>
+</div>
+{% endif %}
+{% endblock content %}
