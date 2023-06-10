@@ -25,11 +25,11 @@
                             <h5 class="fw-bolder">{{ basket.product.name|truncatechars:14 }}</h5>
                             <!-- Product price-->
                             {% if basket.product.sale %}
-                            <p>Price: <span class="text-muted">{{ basket.sale_sum|currency:'rub'}}</span></p>
+                            <p>Цена: <span class="text-muted">{{ basket.sale_sum|currency:'rub'}}</span></p>
                             {% else %}
-                            <p>Price: <span class="text-muted">{{ basket.sum|currency:'rub'}}</span></p>
+                            <p>Цена: <span class="text-muted">{{ basket.sum|currency:'rub'}}</span></p>
                             {% endif %}
-                            <p>Quantity: <span class="text-muted">{{ basket.quantity }}</span></p>
+                            <p>Количество: <span class="text-muted">{{ basket.quantity }}</span></p>
                         </div>
                     </div>
                     <!-- Product actions-->
@@ -43,7 +43,6 @@
             </div>
         </div>
 {% endfor %}
-<hr>
 <div class="col-lg-4">
     <div class="card mb-4">
         <div class="card-header">Итог</div>
